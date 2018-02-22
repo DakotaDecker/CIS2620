@@ -1,3 +1,9 @@
+/*
+    Eric Bjerke and Dakota Decker
+    2/22/18
+    Unit 5 Greenville Motto
+*/
+
 using static System.Console;
 using System.Collections.Generic;
 using System.Linq;
