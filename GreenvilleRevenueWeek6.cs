@@ -42,6 +42,11 @@ namespace Case_Study_1
                 WriteLine("What is {0}'s talent code?", contestantName);
                 Write("Singing: S, Dancing: D, Musical Instrument: M, Other: O - ");
                 string talentCode = ReadLine();
+                while (talentCode != "S" && talentCode != "D" && talentCode != "M" && talentCode != "O")
+                {
+                    Write("Invalid entry. Please try again. Singing: S, Dancing: D, Musical Instrument: M, Other: O - ");
+                    talentCode = ReadLine();
+                }                
                 contestants[x] = contestantName;
                 talents[x] = talentCode;
 
