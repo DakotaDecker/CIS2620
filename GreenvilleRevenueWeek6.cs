@@ -41,30 +41,8 @@ namespace Case_Study_1
                 WriteLine("A tighter race this year! Come out and cast your vote!");
             }
         }
-        static void Main(string[] args)
+        public static void InputContestants(int thisYearContestantsCount, string[] names, string[] talents)
         {
-            //initialize variables
-            double FEE = 25, revenue;
-            int thisYearContestantsCount, lastYearContestantsCount;
-            int singers = 0, dancers = 0, musicians = 0, others = 0;
-
-
-            //get numbers, check if between 0-30
-            thisYearContestantsCount = GetContestantNumber("this");
-            lastYearContestantsCount = GetContestantNumber("last");
-
-            //calculate revenue
-            revenue = FEE * thisYearContestantsCount;
-
-            WriteLine("Estimated " + revenue.ToString("C2") +
-                " in entrance fee revenue this year.");
-
-            FindBiggerYear(thisYearContestantsCount, lastYearContestantsCount);
-
-            //initializes parallel arrays for contestants
-            string[] names = new string[thisYearContestantsCount];
-            string[] talents = new string[thisYearContestantsCount];
-
             //asks for contestant names and talent code
             for (int i = 0; i < thisYearContestantsCount; i++)
             {
@@ -78,10 +56,16 @@ namespace Case_Study_1
                     userInput = (ReadLine()).ToUpper();
                 }
                 while ((userInput != "S") && (userInput != "D") && (userInput != "M") && (userInput != "O"));
-                talents[i] = userInput;
-
+                talents[i] = userInput;                
+            }
+        }
+        public static void DisplayContestants(string[] names, string[] talents)
+        {
+            int singers = 0, dancers = 0, musicians = 0, others = 0;
+            for(int i = 0; i < names.Length; i++)
+            {
                 //increment respective talent counter
-                switch (userInput)
+                switch (talents[i])
                 {
                     case "S":
                         singers += 1;
@@ -94,13 +78,9 @@ namespace Case_Study_1
                         break;
                     case "O":
                         others += 1;
-                        break;
-                    default:
-                        WriteLine("Something went wrong.");
-                        break;
+                        break;                    
                 }
             }
-
             //display numbers of each type of contestant
             WriteLine("Number of singers this year: {0}", singers);
             WriteLine("Number of dancers this year: {0}", dancers);
@@ -126,6 +106,35 @@ namespace Case_Study_1
             while (contName != "q");
 
             ReadLine();
+        }
+        static void Main(string[] args)
+        {
+            //initialize variables
+            double FEE = 25, revenue;
+            int thisYearContestantsCount, lastYearContestantsCount;
+
+            //get numbers, check if between 0-30
+            thisYearContestantsCount = GetContestantNumber("this");
+            lastYearContestantsCount = GetContestantNumber("last");
+
+            //calculate revenue
+            revenue = FEE * thisYearContestantsCount;
+
+            WriteLine("Estimated " + revenue.ToString("C2") +
+                " in entrance fee revenue this year.");
+
+            FindBiggerYear(thisYearContestantsCount, lastYearContestantsCount);
+
+            //initializes parallel arrays for contestants
+            string[] names = new string[thisYearContestantsCount];
+            string[] talents = new string[thisYearContestantsCount];
+
+            //enter contestants
+            InputContestants(thisYearContestantsCount, names, talents);
+
+            //display contestants
+            DisplayContestants(names, talents);
+            
         }
     }
 }
